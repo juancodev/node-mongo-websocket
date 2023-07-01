@@ -1,0 +1,22 @@
+{
+  "name": "node-mongo-websocket",
+  "version": "0.1.0",
+  "description": "practice with nodejs mongodb and websocket for make a chatbox as Telegram or Whatsapp",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "Mongo",
+    "Websocket",
+    "Chat",
+    "Server"
+  ],
+  "author": "juancodev <montillasanchezjuancarlos@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}
