@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-// const router = require('./components/message/network');
 const routes = require('./router/index');
 
 const app = express();
