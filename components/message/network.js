@@ -7,15 +7,20 @@ const router = express.Router();
 router.get('/message', (req, res) => {
 
   //get headers
-  console.log(req.headers);
+  // console.log(req.headers);
 
   // send custom header
-  res.header({
-    "Custom-message-content": "this is a custom message content"
-  })
+  // res.header({
+  //   "Custom-message-content": "this is a custom message content"
+  // })
 
-  response.success(req, res, "List of messages received",
-    200);
+  controller.getMessages()
+    .then((messageList) => {
+      response.success(req, res, messageList, 200);
+    })
+    .catch(error => {
+      response.error(req, res, 'Unexpected error', 500, error.message);
+    })
 
 })
 
