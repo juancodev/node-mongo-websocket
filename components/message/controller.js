@@ -18,13 +18,27 @@ function addMessage(user, message) {
 
 }
 
-function getMessages() {
+function getMessages(filterUser) {
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(filterUser));
+  })
+}
+
+function updateMessage(id, message) {
+  return new Promise(async (resolve, reject) => {
+    if (!id || !message) {
+      console.log('[updateMessage] Error Data');
+      reject('Data invalid in method patch');
+    }
+
+    const result = await store.update(id, message);
+    resolve(result);
+
   })
 }
 
 module.exports = {
   addMessage,
   getMessages,
+  updateMessage,
 }
