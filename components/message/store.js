@@ -1,19 +1,4 @@
-const db = require('mongoose');
 const Model = require('./model');
-
-require('dotenv').config();
-
-const hostDB = process.env.DB_HOST;
-const userDB = process.env.DB_USER;
-const passwordDB = process.env.DB_PASSWORD;
-
-const uri = `mongodb+srv://${userDB}:${passwordDB}@${hostDB}/?retryWrites=true&w=majority`;
-
-db.Promise = global.Promise;
-db.connect(uri, {
-  useNewUrlParser: true,
-});
-console.log('[db] Connected to mongodb');
 
 function addMessage(message) {
   const myMessage = new Model(message);
@@ -39,9 +24,22 @@ async function updateText(id, message) {
   return newMessage;
 }
 
+async function deleteMessage(id) {
+  const existsId = await Model.exists({
+    _id: id
+  })
+
+  if (!existsId) {
+    return existsId;
+  }
+
+
+  return await Model.findByIdAndDelete(id);
+}
+
 module.exports = {
   add: addMessage,
   list: getMessage,
   update: updateText,
-  //delete
+  delete: deleteMessage
 }

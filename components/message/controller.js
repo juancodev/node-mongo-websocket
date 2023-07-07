@@ -37,8 +37,29 @@ function updateMessage(id, message) {
   })
 }
 
+function deleteMessage(id) {
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Id invalid');
+    }
+    store.delete(id)
+      .then((result) => {
+        if (result) {
+
+          resolve();
+        } else {
+          reject("[Controller] Data doesn't exists");
+        }
+      })
+      .catch((error) => {
+        reject(`[Controller Delete] ${error}`);
+      });
+  });
+}
+
 module.exports = {
   addMessage,
   getMessages,
   updateMessage,
+  deleteMessage,
 }

@@ -23,7 +23,7 @@ router.get('/message', (req, res) => {
       response.error(req, res, 'Unexpected error', 500, error.message);
     })
 
-})
+});
 
 router.post('/message', (req, res) => {
 
@@ -47,6 +47,17 @@ router.patch('/message/:id', (req, res) => {
     .catch(error => {
       response.error(req, res, 'Error Update', 500, error);
     })
-})
+});
+
+router.delete('/message/:id', (req, res) => {
+  const id = req.params.id;
+  controller.deleteMessage(id)
+    .then(() => {
+      response.success(req, res, `Message ${id} was deleted success`, 200);
+    })
+    .catch(error => {
+      response.error(req, res, 'Error internal', 500, error);
+    });
+});
 
 module.exports = router;
