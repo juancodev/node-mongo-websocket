@@ -1,11 +1,16 @@
 const express = require('express');
+const multer = require('multer');
 const response = require('../../router/response');
 const controller = require('./controller');
 const router = express.Router();
 
+const upload = multer({
+  destination: 'upload/',
+});
+
 //mini app
-router.get('/message', (req, res) => {
-  const filterMessage = req.query.user || null;
+router.get('/', (req, res) => {
+  const filterMessage = req.query.chat || null;
 
   //get headers
   // console.log(req.headers);
@@ -25,9 +30,9 @@ router.get('/message', (req, res) => {
 
 });
 
-router.post('/message', (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
 
-  controller.addMessage(req.body.user, req.body.message)
+  controller.addMessage(req.body.chat, req.body.user, req.body.message)
     .then((fullMessage) => {
       response.success(req, res, fullMessage, 201);
     })
@@ -37,7 +42,7 @@ router.post('/message', (req, res) => {
 
 });
 
-router.patch('/message/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
   const id = req.params.id
   const message = req.body.message;
   controller.updateMessage(id, message)
@@ -49,7 +54,7 @@ router.patch('/message/:id', (req, res) => {
     })
 });
 
-router.delete('/message/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   controller.deleteMessage(id)
     .then(() => {
