@@ -1,10 +1,15 @@
 const store = require('./store');
 
-function addMessage(chat, user, message) {
+function addMessage(chat, user, message, file) {
   return new Promise((resolve, reject) => {
     if (!chat || !user || !message) {
       console.error('[MessageController]: missing user or message');
       reject('No user or message');
+    }
+
+    let filePath = "";
+    if (file) {
+      filePath = 'http://localhost:3001/app/files/' + file.filename;
     }
 
     const fullMessage = {
@@ -12,6 +17,7 @@ function addMessage(chat, user, message) {
       user: user,
       message: message,
       date: new Date(),
+      file: filePath,
     }
     store.add(fullMessage);
     resolve(fullMessage);
