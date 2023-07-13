@@ -4,8 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <h1>Prueba del servidor</h1>
+    <script>
+      let socket = io.connect("http://localhost:3010", {
+        forceNew: true,
+      });
+
+      socket.on("Message", function (data) {
+        console.log(data);
+      });
+    </script>
   </body>
 </html>
