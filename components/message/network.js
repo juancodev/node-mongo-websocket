@@ -3,9 +3,10 @@ const multer = require('multer');
 const response = require('../../router/response');
 const controller = require('./controller');
 const router = express.Router();
+const config = require('../../config');
 
 const upload = multer({
-  destination: 'public/files/',
+  destination: `public/${config.filesRoute}/`,
 });
 
 //mini app

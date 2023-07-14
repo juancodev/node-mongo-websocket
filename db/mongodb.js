@@ -6,7 +6,7 @@ const hostDB = process.env.DB_HOST;
 const userDB = process.env.DB_USER;
 const passwordDB = process.env.DB_PASSWORD;
 
-const uri = `mongodb+srv://${userDB}:${passwordDB}@${hostDB}/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${userDB}:${passwordDB}@${hostDB}/?retryWrites=true&w=majority` || process.env.DB_URL;
 
 db.Promise = global.Promise;
 
